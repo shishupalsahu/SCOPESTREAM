@@ -4,6 +4,7 @@ Django settings for core project.
 
 from pathlib import Path
 import os
+import dj_database_url
 from dotenv import load_dotenv
 
 # Load environment variables (we will create .env later)
@@ -73,17 +74,21 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 # Database
 # Connects to PostgreSQL. Make sure your local Postgres has these credentials or update them!
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'scopestream', # The database you just created
+#         'USER': 'postgres',    # Your local postgres username (usually 'postgres')
+#         'PASSWORD': 'shishupal@321',# Your local postgres password (change this to your actual password)
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+#     }
+# }
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'scopestream', # The database you just created
-        'USER': 'postgres',    # Your local postgres username (usually 'postgres')
-        'PASSWORD': 'shishupal@321',# Your local postgres password (change this to your actual password)
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
+    'default': dj_database_url.config(
+        default=os.environ.get('DATABASE_URL')
+    )
 }
-
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
@@ -115,8 +120,29 @@ STATIC_URL = 'static/'
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# CORS Settings (Allows React running on localhost:5173 to call this API)
-CORS_ALLOW_ALL_ORIGINS = True # Change to False and define CORS_ALLOWED_ORIGINS in production
+# # CORS Settings (Allows React running on localhost:5173 to call this API)
+# CORS_ALLOW_ALL_ORIGINS = True # Change to False and define CORS_ALLOWED_ORIGINS in production
+
+# # REST Framework Settings
+# REST_FRAMEWORK = {
+#     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+#     'PAGE_SIZE': 50
+# }
+# CORS Settings
+
+CORS_ALLOW_ALL_ORIGINS = False
+
+CORS_ALLOWED_ORIGINS = [
+    "https://your-frontend-name.vercel.app",
+    "http://localhost:5173",
+]
+
+# ALLOWED_HOSTS = [
+#     "your-backend-name.onrender.com",
+#     "localhost",
+#     "127.0.0.1",
+# ]
+ALLOWED_HOSTS = ["*"]
 
 # REST Framework Settings
 REST_FRAMEWORK = {

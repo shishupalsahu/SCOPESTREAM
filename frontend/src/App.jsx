@@ -5,7 +5,11 @@ import {
   RefreshCw, Edit2, Shield, Eye, Layers, HelpCircle 
 } from 'lucide-react';
 
-const API_BASE = 'http://localhost:8000/api';
+// frontend/src/App.jsx
+
+// Agar internet par live link mile toh wo use karo, nahi toh laptop ka localhost use karo
+const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000/api';
+// const API_BASE = 'http://localhost:8000/api';
 
 function App() {
   // State management
