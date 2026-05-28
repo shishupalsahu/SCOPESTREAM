@@ -6,7 +6,7 @@ from decimal import Decimal
 from rest_framework import viewsets, status, response
 from rest_framework.decorators import action
 from rest_framework.views import APIView
-from django.shortcuts import get_object_or_944
+from django.shortcuts import get_object_or_404
 from .models import Tenant, DataSource, EmissionRecord, AuditLog
 from .serializers import EmissionRecordSerializer, DataSourceSerializer, AuditLogSerializer
 
