@@ -129,7 +129,7 @@ class DataIngestionView(APIView):
                         unit_raw = row.get('MEINS') or row.get('Unit')
                         date_raw = row.get('BUDAT') or row.get('Posting_Date') # Format: YYYYMMDD or YYYY-MM-DD
                         
-                        parsed_date = datetime.strptime(date_raw.replace('-', ''), "%Y%m%dd").date() if len(date_raw.replace('-', '')) == 8 else datetime.today().date()
+                        parsed_date = datetime.strptime(date_raw.replace('-', ''), "%Y%m%d").date() if len(date_raw.replace('-', '')) == 8 else datetime.today().date()
                         qty = Decimal(str(quantity_raw).replace(',', '.'))
                         
                         # Apply normalization rules
